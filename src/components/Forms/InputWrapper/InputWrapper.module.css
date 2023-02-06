@@ -1,0 +1,7 @@
+.input-wrapper__wrapper {
+    padding-bottom: 1.5rem;
+}
+
+.input-wrapper__error {
+    color: red
+}

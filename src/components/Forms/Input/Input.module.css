@@ -1,0 +1,14 @@
+.input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    border-radius: 0.25rem;
+}
+
+.input:focus {
+    border: 1px solid #007bff;
+    /* border-color: pink; */
+}

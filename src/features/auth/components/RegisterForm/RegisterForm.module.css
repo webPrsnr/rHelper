@@ -1,0 +1,28 @@
+.register-form__wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-form__btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-form__foter {
+    padding-top: 10px;
+    display: flex;
+    justify-content: end;
+}
+
+.register-form__link {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.register-form__link:hover {
+    color: #007bffc1;
+}

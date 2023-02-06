@@ -1,0 +1,21 @@
+.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.error__title {
+    font-weight: 400;
+}
+
+.error__btn {
+    margin-top: 15px;
+}
+
+.spinner__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

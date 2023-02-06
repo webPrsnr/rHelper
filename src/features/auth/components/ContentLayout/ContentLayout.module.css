@@ -1,0 +1,14 @@
+.layout__wrapper {
+    /* padding-top: 15px; */
+    min-height: 100vh;
+}
+
+.layout__head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.layout__title {}
+
+.layout__body {}

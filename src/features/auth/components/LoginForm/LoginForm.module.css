@@ -1,0 +1,28 @@
+.login-form__wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form__btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form__foter {
+    padding-top: 10px;
+    display: flex;
+    justify-content: end;
+}
+
+.login-form__link {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.login-form__link:hover {
+    color: #007bffc1;
+}

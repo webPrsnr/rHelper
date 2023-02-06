@@ -1,0 +1,76 @@
+.landing {
+    position: relative;
+}
+
+.landing::after {
+    content: url("@/assets/hiring.svg");
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: -999;
+}
+
+
+.landing__wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 1450px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.landing__title {
+    padding-top: 25px;
+}
+
+.title__welcome {
+    text-transform: uppercase;
+    font-size: 3.5em;
+    color: #2c4776
+}
+
+.title__welcome span {
+    color: #007bff
+}
+
+.title__descr {
+    width: 40em;
+}
+
+.title__btn {
+    margin-top: 10px;
+}
+
+.landing__features {
+    padding-top: 15px;
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.feature__block_1 {
+    padding-left: 2em;
+}
+
+.feature__block_2 {
+    padding-left: 3em;
+}
+
+.feature__block_3 {
+    padding-left: 4em;
+}
+
+
+.block__title {
+    /* TODO приукрасить блок */
+}
+
+.landing__footer {
+    text-align: center;
+}
+
+.landing__footer::before {
+    content: "©";
+}

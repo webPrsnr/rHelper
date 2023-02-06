@@ -1,0 +1,40 @@
+.button {
+    display: inline-block;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 0;
+}
+
+.primary {
+    color: #ffffff;
+    background-color: #007bff;
+}
+
+.inverse {
+    color: #ffffff;
+    background-color: #138496;
+}
+
+.danger {
+    color: #ffffff;
+    background-color: #ff000d;
+}
+
+.sm {
+    padding: 10px 30px;
+}
+
+.md {
+    padding: 15px 45px;
+}
+
+.lg {
+    padding: 25px 65px;
+}
+
+.spinner__loading {
+    margin: 0 5px;
+}
