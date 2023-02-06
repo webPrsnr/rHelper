@@ -8,6 +8,6 @@ export const storage = {
     window.localStorage.setItem(`${prefix}token`, JSON.stringify(token));
   },
   clearToken: () => {
-    window.localStorage.removeItem(`${prefix}`);
+    window.localStorage.removeItem(`${prefix}token`);
   },
 };
