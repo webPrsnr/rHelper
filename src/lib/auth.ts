@@ -4,6 +4,7 @@ import { UserResponse } from "@/features/auth/types/response";
 import { configureAuth } from "react-query-auth";
 import { storage } from "@/utils/storage";
 import { login, LoginDTO } from "@/features/auth/api/login";
+import { logout } from "@/features/auth/api/logout";
 
 const handleUserResponse = async (data: UserResponse) => {
   const { accessToken, user } = data;
@@ -32,6 +33,7 @@ const loginFn = async (data: LoginDTO) => {
 };
 
 const logoutFn = async () => {
+  const response = await logout();
   storage.clearToken();
   window.location.assign(window.location.origin as unknown as string);
 };
