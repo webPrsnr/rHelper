@@ -1,2 +1,3 @@
-export * from "./Landing/Landing";
-export * from "./Dashboard/Dashboard";
+export * from "./Landing";
+export * from "./Dashboard";
+export * from "./NotFound";

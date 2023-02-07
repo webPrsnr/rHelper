@@ -1,0 +1,21 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.image {
+    width: 20rem;
+    height: 20rem;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: inherit;
+}
+
+.btn {
+    margin-top: 15px;
+}
