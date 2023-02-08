@@ -1,10 +1,6 @@
 import { api } from "@/lib/ky";
-import { RegisterValues } from "../components";
+import { AuthResponse } from "../types/response";
 
-export const getUser = async (): Promise<RegisterValues> => {
-  // try {
+export const getUser = async (): Promise<AuthResponse> => {
   return await api.get("me").json();
-  // } catch (error) {
-  //   return null;
-  // }
 };
