@@ -1,0 +1,41 @@
+.profile {
+    padding-top: 1.5rem;
+}
+
+.profile__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.user__wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.user__elem {
+    padding: 1.75rem;
+    border-top: 1px solid rgb(229, 231, 235)
+}
+
+.profile__container {
+    margin-top: 1rem;
+    width: 50rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+}
+
+.profile__head {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+}
+
+.head__left {
+    padding-left: 1rem;
+}
+
+.profile__body {
+    width: 100%;
+    border-collapse: collapse;
+}
