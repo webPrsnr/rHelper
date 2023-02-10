@@ -5,7 +5,7 @@ import { Spinner } from "@/components/Elements";
 import { Dashboard as Layout } from "@/components/Layouts";
 import { lazyImport } from "@/utils/lazyImport";
 
-const { Dashboard } = lazyImport(() => import("@/features/misc"), "Dashboard");
+const { Panel } = lazyImport(() => import("@/features/dashboard"), "Panel");
 const { Profile } = lazyImport(() => import("@/features/users"), "Profile");
 
 const App = () => {
@@ -29,7 +29,7 @@ export const protectedRoutes = [
     path: "/app",
     element: <App />,
     children: [
-      { path: "", element: <Dashboard /> },
+      { path: "", element: <Panel /> },
       { path: "profile", element: <Profile /> },
     ],
   },
