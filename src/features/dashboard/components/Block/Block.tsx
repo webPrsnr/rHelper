@@ -6,6 +6,7 @@ import { DragCard } from "../Card/Card";
 import { SingleCard, blockType, cardType } from "../../types";
 import { useCard, useMoveCard, useTransferBlock } from "../../api";
 import style from "./Block.module.css";
+import { BlockOptions } from "../BlockOptions/BlockOptions";
 
 interface BlockProps {
   title: string;
@@ -114,11 +115,7 @@ export const Block = ({ children, title, id, userId, hIndex }: BlockProps) => {
           <div className={style["block__head"]}>
             <h3>{title}</h3>
             <div>
-              <span className={style["more__btn"]}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-                  <path d="M176 416a112 112 0 1 1 0 224 112 112 0 0 1 0-224zm336 0a112 112 0 1 1 0 224 112 112 0 0 1 0-224zm336 0a112 112 0 1 1 0 224 112 112 0 0 1 0-224z" />
-                </svg>
-              </span>
+              <BlockOptions id={id} />
             </div>
           </div>
           <div className={style["block__body"]}>
