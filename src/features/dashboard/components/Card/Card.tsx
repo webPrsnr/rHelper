@@ -1,3 +1,6 @@
+import clsx from "clsx";
+import { useDrag } from "react-dnd";
+import { cardType } from "../../types";
 import style from "./Card.module.css";
 
 interface CardProps {
@@ -7,6 +10,16 @@ interface CardProps {
   name: string;
   date: string;
   note: string;
+  id: string;
+  hIndex: string;
+  blockId: string;
+}
+
+export interface DragCard {
+  hIndex: string;
+  id: string;
+  type: string;
+  blockId: string;
 }
 
 export const Card = ({
@@ -16,9 +29,28 @@ export const Card = ({
   note,
   salary,
   grade,
+  id,
+  hIndex,
+  blockId,
 }: CardProps) => {
+  const [{ isDragging }, cardDrag] = useDrag(
+    {
+      type: cardType.ELEMENT,
+      item: () => {
+        return { id, hIndex, blockId };
+      },
+      collect: (monitor) => {
+        return {
+          isDragging: monitor.isDragging(),
+        };
+      },
+    },
+    [hIndex]
+  );
+
+  const opacity = isDragging ? style["opacity"] : null;
   return (
-    <div className={style["card"]}>
+    <div ref={cardDrag} className={clsx(style["card"], opacity)}>
       <div className={style["card__wrapper"]}>
         <div className={style["card__status"]}>
           <div className={style["card__check"]}>
@@ -36,17 +68,17 @@ export const Card = ({
               <path
                 fill="none"
                 stroke="#000"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M14 11H9V3h5a4 4 0 0 1 4 4h0a4 4 0 0 1-4 4ZM9 3v18"
               />
               <path
                 fill="none"
                 stroke="#000"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M6 15h9"
                 data-name="primary"
               />
