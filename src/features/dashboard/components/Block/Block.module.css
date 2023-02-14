@@ -18,3 +18,7 @@
     cursor: pointer;
     fill: #71717A
 }
+
+.opacity {
+    opacity: 0.5;
+}
