@@ -1,3 +1,4 @@
+import { Tooltip } from "@/components/Elements";
 import clsx from "clsx";
 import { useDrag } from "react-dnd";
 import { cardType } from "../../types";
@@ -89,9 +90,12 @@ export const Card = ({
           <h4>{name}</h4>
         </div>
         <div className={style["card__notes"]}>
-          <div className={style["date__block"]}>
+          <Tooltip
+            content={`Решить до ${date}`}
+            className={style["date__block"]}
+          >
             <span className={style["date__icon"]}>{date}</span>
-          </div>
+          </Tooltip>
           <div className={style["note__block"]}>
             <span className={style["note__icon"]}>{note}</span>
           </div>
