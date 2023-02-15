@@ -13,8 +13,15 @@ const App = () => {
     <Layout>
       <Suspense
         fallback={
-          <div>
-            <Spinner />
+          <div
+            style={{
+              height: "100vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Spinner size="md" />
           </div>
         }
       >
