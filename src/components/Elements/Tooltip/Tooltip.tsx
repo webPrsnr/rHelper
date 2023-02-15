@@ -16,7 +16,7 @@ export const Tooltip = ({
   delay = 400,
 }: TooltipProps) => {
   let timeout: NodeJS.Timeout;
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
 
   const showTooltip = () => {
     timeout = setTimeout(() => {
