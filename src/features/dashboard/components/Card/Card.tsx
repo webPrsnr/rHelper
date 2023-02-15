@@ -55,8 +55,7 @@ export const Card = ({
       <div className={style["card__wrapper"]}>
         <div className={style["card__status"]}>
           <div className={style["card__check"]}>
-            <span>{grade}</span>
-            <span>{status}</span>
+            <span className={style["card__grade"]}>{grade}</span>
           </div>
           <span>
             {salary}

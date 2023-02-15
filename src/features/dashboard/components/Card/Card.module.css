@@ -20,6 +20,13 @@
     gap: 1rem;
 }
 
+.card__grade {
+    padding: 0.1rem 0.5rem;
+    border-radius: 1rem;
+    background-color: rgb(0, 123, 255);
+    color: #fff
+}
+
 .card__salary {
     width: 1rem;
     height: 1rem;
