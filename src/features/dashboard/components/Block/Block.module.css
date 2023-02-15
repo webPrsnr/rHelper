@@ -11,6 +11,11 @@
     align-items: center;
 }
 
+.block__spinner {
+    display: block;
+    margin: 0 auto;
+}
+
 .more__btn {
     display: block;
     height: 1rem;

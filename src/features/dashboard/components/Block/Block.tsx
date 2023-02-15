@@ -7,6 +7,7 @@ import { SingleCard, blockType, cardType } from "../../types";
 import { useCard, useMoveCard, useTransferBlock } from "../../api";
 import style from "./Block.module.css";
 import { BlockOptions } from "../BlockOptions/BlockOptions";
+import { Spinner } from "@/components/Elements";
 
 interface BlockProps {
   title: string;
@@ -103,7 +104,6 @@ export const Block = ({ children, title, id, userId, hIndex }: BlockProps) => {
   const hover = isHoveredCard && cardElem.blockId !== id ? true : false;
 
   dragRef(dropRef(ref));
-
   return (
     <div ref={cardDrop} style={{ position: "relative" }}>
       <div
@@ -111,21 +111,17 @@ export const Block = ({ children, title, id, userId, hIndex }: BlockProps) => {
         className={clsx(style["block"], opacity)}
         data-handler-id={handlerId}
       >
-        <div className={style["block__wrapper"]}>
-          <div className={style["block__head"]}>
-            <h3>{title}</h3>
-            <div>
+        {cards.status === "loading" ? (
+          <Spinner className={style["block__spinner"]} />
+        ) : (
+          <>
+            <div className={style["block__head"]}>
+              <h3>{title}</h3>
               <BlockOptions id={id} />
             </div>
-          </div>
-          <div className={style["block__body"]}>
-            {cards.status === "loading" ? (
-              <span>Loading...</span>
-            ) : (
-              cards.data?.results.map((card) => children(card, card.h_index))
-            )}
-          </div>
-        </div>
+            {cards.data?.results.map((card) => children(card, card.h_index))}
+          </>
+        )}
       </div>
       {hover && (
         <div
