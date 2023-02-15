@@ -16,3 +16,7 @@
     overflow-x: scroll;
     min-height: 10rem;
 }
+
+.panel__spinner {
+    margin: auto;
+}

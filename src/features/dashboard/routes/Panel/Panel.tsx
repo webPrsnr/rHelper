@@ -1,3 +1,4 @@
+import { Spinner } from "@/components/Elements";
 import { useUser } from "@/lib/auth";
 import { useCallback } from "react";
 import { useBlock } from "../../api";
@@ -50,7 +51,7 @@ export const Panel = () => {
       <h2 className={style["panel__title"]}>Мониторинг</h2>
       <div className={style["panel__wrapper"]}>
         {data.status === "loading" ? (
-          <span>Loading...</span>
+          <Spinner size="lg" className={style["panel__spinner"]} />
         ) : (
           data.data?.columns.map((block, index) => renderBlock(block, index))
         )}
