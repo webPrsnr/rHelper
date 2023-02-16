@@ -1,9 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import { clsx } from "clsx";
+import { Fragment, ReactElement, ReactNode } from "react";
 import style from "./BlockOptions.module.css";
-import { useDeleteBlock } from "../../api/deleteBlock";
-import { Spinner } from "@/components/Elements";
+import { BlockDelete } from "../BlockDelete";
 
 interface BlockOptionsProps {
   id: string;
@@ -11,17 +9,19 @@ interface BlockOptionsProps {
 
 interface BlockOptions {
   name: string;
-  onClick?: () => void;
+  render?: ReactElement;
 }
 
 export const BlockOptions = ({ id }: BlockOptionsProps) => {
-  const deleteMutation = useDeleteBlock();
   const options: BlockOptions[] = [
     {
       name: "Удалить",
-      onClick: () => {
-        deleteMutation.mutate(id);
-      },
+      render: (
+        <BlockDelete
+          id={id}
+          triggerBtn={<span className={style["menu__item"]}>Удалить</span>}
+        />
+      ),
     },
     //TODO: редактировать
   ];
@@ -49,18 +49,7 @@ export const BlockOptions = ({ id }: BlockOptionsProps) => {
           <Menu.Items className={style["menu__list"]}>
             {options.map((option) => (
               <Menu.Item key={option.name}>
-                {({ active }) => (
-                  <span
-                    onClick={option.onClick}
-                    className={clsx(
-                      style["menu__item"],
-                      active ? style["menu__item_active"] : null
-                    )}
-                  >
-                    {deleteMutation.isLoading && <Spinner size="sm" />}
-                    {option.name}
-                  </span>
-                )}
+                {({ active }) => <>{option.render}</>}
               </Menu.Item>
             ))}
           </Menu.Items>
