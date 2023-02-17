@@ -1,0 +1,35 @@
+.confirm__title {
+    position: relative;
+}
+
+.confirm__title::before {
+    position: absolute;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1.5rem;
+    height: 1.5rem;
+    right: 0;
+}
+
+.delete::before {
+    background-image: url("@/assets/delete.svg");
+}
+
+.info::before {
+    background-image: url("@/assets/info.svg");
+}
+
+.accept::before {
+    background-image: url("@/assets/accept.svg");
+}
+
+.confirm__descr {
+    padding: 1rem 0;
+}
+
+.confirm__btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

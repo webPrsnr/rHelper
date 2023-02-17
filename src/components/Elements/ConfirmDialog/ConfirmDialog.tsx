@@ -3,6 +3,16 @@ import { cloneElement, ReactElement } from "react";
 import { Button } from "../Button";
 import { Dialog, DialogTitle } from "../Dialog";
 
+import { clsx } from "clsx";
+
+import style from "./ConfirmDialog.module.css";
+
+const confirmInfo = {
+  delete: "delete",
+  info: "info",
+  accept: "accept",
+};
+
 interface ConfirmDialogProps {
   triggerBtn: ReactElement;
   confirmBtn: ReactElement;
@@ -10,6 +20,7 @@ interface ConfirmDialogProps {
   isDone?: boolean;
   title: string;
   cancelBtnText?: string;
+  variant: keyof typeof confirmInfo;
 }
 
 export const ConfirmDialog = ({
@@ -19,6 +30,7 @@ export const ConfirmDialog = ({
   body = "",
   cancelBtnText = "Отмена",
   isDone = false,
+  variant = "info",
 }: ConfirmDialogProps) => {
   const { isOpen, open, close } = useDisclosure();
 
@@ -28,12 +40,18 @@ export const ConfirmDialog = ({
     <>
       {trigger}
       <Dialog isOpen={isOpen} onClose={close}>
-        <DialogTitle>{title}</DialogTitle>
-        {body && <p>{body}</p>}
-        <Button type="button" variant="inverse" onClick={close}>
-          {cancelBtnText}
-        </Button>
-        {confirmBtn}
+        <DialogTitle
+          className={clsx(style["confirm__title"], style[confirmInfo[variant]])}
+        >
+          {title}
+        </DialogTitle>
+        {body && <p className={style["confirm__descr"]}>{body}</p>}
+        <div className={style["confirm__btns"]}>
+          <Button type="button" variant="inverse" size="sm" onClick={close}>
+            {cancelBtnText}
+          </Button>
+          {confirmBtn}
+        </div>
       </Dialog>
     </>
   );
