@@ -10,11 +10,17 @@ export const BlockDelete = ({ id, triggerBtn }: BlockDelete) => {
   const deleteMutation = useDeleteBlock();
   return (
     <ConfirmDialog
+      variant="delete"
       title="Удалить блок"
       body="Вы действительно хотите удалить блок?"
       triggerBtn={triggerBtn}
       confirmBtn={
-        <Button type="button" onClick={() => deleteMutation.mutate(id)}>
+        <Button
+          type="button"
+          variant="danger"
+          size="sm"
+          onClick={() => deleteMutation.mutate(id)}
+        >
           Удалить
         </Button>
       }
