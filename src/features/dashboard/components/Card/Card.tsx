@@ -1,7 +1,10 @@
 import { Tooltip } from "@/components/Elements";
-import clsx from "clsx";
+import { memo } from "react";
 import { useDrag } from "react-dnd";
+import { useCard } from "../../api";
 import { cardType } from "../../types";
+import { BlockOptions } from "../BlockOptions/BlockOptions";
+import { CardNotes } from "../CardNotes/CardNotes";
 import style from "./Card.module.css";
 
 interface CardProps {
@@ -12,7 +15,6 @@ interface CardProps {
   date: string;
   note: string;
   id: string;
-  hIndex: string;
   blockId: string;
 }
 
@@ -24,21 +26,20 @@ export interface DragCard {
 }
 
 export const Card = ({
-  status,
-  name,
+  blockId,
   date,
-  note,
-  salary,
   grade,
   id,
-  hIndex,
-  blockId,
+  name,
+  note,
+  salary,
+  status,
 }: CardProps) => {
   const [{ isDragging }, cardDrag] = useDrag(
     {
       type: cardType.ELEMENT,
       item: () => {
-        return { id, hIndex, blockId };
+        return { id };
       },
       collect: (monitor) => {
         return {
@@ -46,12 +47,14 @@ export const Card = ({
         };
       },
     },
-    [hIndex]
+    []
   );
-
-  const opacity = isDragging ? style["opacity"] : null;
   return (
-    <div ref={cardDrag} className={clsx(style["card"], opacity)}>
+    <div
+      ref={cardDrag}
+      className={style["card"]}
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+    >
       <div className={style["card__wrapper"]}>
         <div className={style["card__status"]}>
           <div className={style["card__check"]}>
@@ -95,11 +98,39 @@ export const Card = ({
           >
             <span className={style["date__icon"]}>{date}</span>
           </Tooltip>
-          <div className={style["note__block"]}>
-            <span className={style["note__icon"]}>{note}</span>
-          </div>
+          <CardNotes note={note} id={id} />
         </div>
       </div>
     </div>
   );
 };
+
+interface CardListProps {
+  title: string;
+  id: string;
+}
+
+export const CardList = memo(function CardExmpl({ title, id }: CardListProps) {
+  const cards = useCard(id);
+  return (
+    <>
+      <div className={style["block__head"]}>
+        <h3>{title}</h3>
+        <BlockOptions id={id} />
+      </div>
+      {cards.data?.results.map((card) => (
+        <Card
+          key={card.resume_id}
+          blockId={id}
+          date="hello"
+          grade="Frontend"
+          name="William"
+          note="Hello"
+          salary={card.resume_fields.salary}
+          id={card.resume_id}
+          status="pending"
+        />
+      ))}
+    </>
+  );
+});
