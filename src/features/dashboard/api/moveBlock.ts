@@ -29,9 +29,6 @@ export const useTransferBlock = () => {
     mutationFn: (obj: MoveBlockProps) => {
       return moveBlock(obj);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["block"] });
-    },
   });
   return mutation;
 };
