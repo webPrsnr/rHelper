@@ -2,7 +2,9 @@ const prefix = "nice-prefix-";
 
 export const storage = {
   getToken: () => {
-    return JSON.parse(window.localStorage.getItem(`${prefix}token`) as string);
+    return JSON.parse(
+      window.localStorage.getItem(`${prefix}token`) as string
+    ) as string;
   },
   setToken: (token: string) => {
     window.localStorage.setItem(`${prefix}token`, JSON.stringify(token));
