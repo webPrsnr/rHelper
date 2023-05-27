@@ -17,7 +17,6 @@ const retryWithFreshToken = async (
 ) => {
   const token = storage.getToken();
   if (response.status === 401 && token) {
-    console.log("run");
     const data = (await api.get("refresh").json()) as UserResponse;
     storage.setToken(data.accessToken);
     request.headers.set("authorization", `Bearer ${data?.accessToken}`);
