@@ -5,11 +5,6 @@
     min-width: 20rem;
 }
 
-.block__head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 .block__spinner {
     display: block;
