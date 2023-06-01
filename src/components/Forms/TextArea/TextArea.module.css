@@ -1,0 +1,16 @@
+.textarea {
+    display: block;
+    padding: .625rem;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    border-radius: 0;
+    width: 100%;
+    appearance: none;
+    resize: none;
+    border: 2px solid rgb(229, 231, 235);
+}
+
+.textarea:focus {
+    border-color: rgb(0, 123, 255);
+    outline: 3px solid transparent;
+}
