@@ -4,6 +4,7 @@ export interface AuthResponse {
   firstName: string;
   lastName: string;
   organization: string;
+  api: string;
 }
 
 export interface UserResponse {
