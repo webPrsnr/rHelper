@@ -1,0 +1,20 @@
+.note__block {
+    position: relative;
+    padding-left: 1rem;
+    cursor: pointer;
+}
+
+.note__icon::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 1px;
+    background-image: url("@/assets/notes.svg");
+    background-size: cover;
+    width: 1rem;
+    height: 1rem;
+}
+
+.notes__form {
+    box-shadow: none;
+}
