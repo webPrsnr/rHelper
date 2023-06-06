@@ -3,11 +3,14 @@ export interface SingleCard {
   resume_id: string;
   h_index: string;
   resume_link: string;
+  resume_name: string;
+  resume_salary: string;
+  resume_stack: "Frontend" | "Backend" | "Other";
   resume_fields: {
-    name: string;
-    age: number;
-    salary: number;
-  };
+    tag: string;
+    text: string;
+  }[];
+  updatedAt: string;
 }
 
 export interface CardResponse {
