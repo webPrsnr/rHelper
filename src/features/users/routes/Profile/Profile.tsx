@@ -18,6 +18,11 @@ const UserProperty = ({ label, value }: UserProperty) => {
 
 export const Profile = () => {
   const { data } = useUser();
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <section className={style["profile"]}>
       <div className={style["profile__wrapper"]}>
@@ -29,14 +34,13 @@ export const Profile = () => {
                 Здесь вы можете редактировать свой профиль
               </p>
             </div>
-            <div></div>
           </div>
           <div className={style["profile__body"]}>
-            <UserProperty label={"Имя"} value={data!.firstName} />
-            <UserProperty label={"Фамилия"} value={data!.lastName} />
-            <UserProperty label={"Компания"} value={data!.organization} />
-            <UserProperty label={"Логин"} value={data!.login} />
-            <UserProperty label={"API-ключ"} value={data!.id} />
+            <UserProperty label={"Имя"} value={data.firstName} />
+            <UserProperty label={"Фамилия"} value={data.lastName} />
+            <UserProperty label={"Компания"} value={data.organization} />
+            <UserProperty label={"Логин"} value={data.login} />
+            <UserProperty label={"API-ключ"} value={data.api} />
           </div>
         </div>
       </div>
