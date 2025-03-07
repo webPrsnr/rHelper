@@ -81,7 +81,7 @@ export const Dashboard = ({ children }: DashboardProps) => {
     <section className={style["dashboard"]}>
       <header className={style["dashboard__header"]}>
         <div className={style["header__wrapper"]}>
-          <div>
+          <Link to="/app">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="-2190.46 -1499.46 3594.37 2265.22"
@@ -99,7 +99,7 @@ export const Dashboard = ({ children }: DashboardProps) => {
                 transform="scale(.512 -.512)"
               />
             </svg>
-          </div>
+          </Link>
           <div>
             <UserNavigation />
           </div>

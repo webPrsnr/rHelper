@@ -5,10 +5,7 @@
 .menu__button {
     border: none;
     box-shadow: none;
-}
-
-.menu__button:hover {
-    background-color: transparent;
+    background-color: inherit;
 }
 
 .more__btn {

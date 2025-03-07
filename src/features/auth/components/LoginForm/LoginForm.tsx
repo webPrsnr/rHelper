@@ -42,7 +42,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
               registration={register("password")}
               error={formState.errors["password"]}
               label={"Пароль"}
-              type="text"
+              type="password"
             />
             <Button
               type="submit"

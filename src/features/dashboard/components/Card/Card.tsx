@@ -1,21 +1,23 @@
-import { Tooltip } from "@/components/Elements";
+import { Spinner, Tooltip } from "@/components/Elements";
+import clsx from "clsx";
 import { memo } from "react";
 import { useDrag } from "react-dnd";
 import { useCard } from "../../api";
+import { useGetCard } from "../../api/getCardInfo";
 import { cardType } from "../../types";
 import { BlockOptions } from "../BlockOptions/BlockOptions";
 import { CardNotes } from "../CardNotes/CardNotes";
+import { CardEdit, DeleteCard } from "../CardOptions/CardOptions";
 import style from "./Card.module.css";
 
 interface CardProps {
-  grade: string;
-  status: string;
-  salary: number;
-  name: string;
-  date: string;
-  note: string;
   id: string;
-  blockId: string;
+  link: string;
+  salary: string;
+  grade: "Frontend" | "Backend" | "Other";
+  date: string;
+  name: string;
+  fields: { tag: string; text: string }[];
 }
 
 export interface DragCard {
@@ -25,16 +27,23 @@ export interface DragCard {
   blockId: string;
 }
 
+const gradeInitColor = {
+  Frontend: "grade__front",
+  Backend: "grade__back",
+  Other: "grade__other",
+};
+
 export const Card = ({
-  blockId,
-  date,
-  grade,
   id,
+  date,
+  fields,
+  grade,
+  link,
   name,
-  note,
   salary,
-  status,
 }: CardProps) => {
+  const gradeColor = gradeInitColor[grade];
+  const fixedData = new Date(date).toLocaleDateString();
   const [{ isDragging }, cardDrag] = useDrag(
     {
       type: cardType.ELEMENT,
@@ -47,7 +56,7 @@ export const Card = ({
         };
       },
     },
-    []
+    [id]
   );
   return (
     <div
@@ -58,7 +67,9 @@ export const Card = ({
       <div className={style["card__wrapper"]}>
         <div className={style["card__status"]}>
           <div className={style["card__check"]}>
-            <span className={style["card__grade"]}>{grade}</span>
+            <span className={clsx(style["card__grade"], style[gradeColor])}>
+              {grade}
+            </span>
           </div>
           <span>
             {salary}
@@ -93,44 +104,87 @@ export const Card = ({
         </div>
         <div className={style["card__notes"]}>
           <Tooltip
-            content={`Решить до ${date}`}
+            content={`Обновлено:${fixedData}`}
             className={style["date__block"]}
           >
-            <span className={style["date__icon"]}>{date}</span>
+            <span className={style["date__icon"]}>{fixedData}</span>
           </Tooltip>
-          <CardNotes note={note} id={id} />
+          <Tooltip content="Поля соискателя">
+            <CardNotes fields={fields} id={id} />
+          </Tooltip>
+          <Tooltip content="Информация по соискателю">
+            <CardEdit id={id} name={name} stack={grade} salary={salary} />
+          </Tooltip>
+
+          <DeleteCard id={id} />
         </div>
       </div>
     </div>
   );
 };
 
+const CardWrapper = ({ id }: { id: string }) => {
+  const result = useGetCard(id);
+  if (result.status === "loading") {
+    return (
+      <div className={style["card"]}>
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (result.status === "error") {
+    return null;
+  }
+
+  const {
+    resume_fields: fields,
+    resume_link: link,
+    resume_name: name,
+    resume_salary: salary,
+    resume_stack: grade,
+    updatedAt: date,
+  } = result.data.resume;
+
+  return (
+    <Card
+      date={date}
+      fields={fields}
+      grade={grade}
+      id={id}
+      salary={salary}
+      link={link}
+      name={name}
+    />
+  );
+};
+
 interface CardListProps {
   title: string;
   id: string;
+  deleteColumn: (id: string) => void;
 }
 
-export const CardList = memo(function CardExmpl({ title, id }: CardListProps) {
+export const CardList = memo(function CardExmpl({
+  title,
+  id,
+  deleteColumn,
+}: CardListProps) {
   const cards = useCard(id);
+  if (!cards.data) {
+    return null;
+  }
   return (
     <>
       <div className={style["block__head"]}>
         <h3>{title}</h3>
-        <BlockOptions id={id} />
+        <BlockOptions id={id} deleteColumn={deleteColumn} />
       </div>
-      {cards.data?.results.map((card) => (
-        <Card
-          key={card.resume_id}
-          blockId={id}
-          date="hello"
-          grade="Frontend"
-          name="William"
-          note="Hello"
-          salary={card.resume_fields.salary}
-          id={card.resume_id}
-          status="pending"
-        />
-      ))}
+      {cards.status === "success"
+        ? cards.data.results.map((el) => (
+            <CardWrapper key={el.resume_id} id={el.resume_id} />
+          ))
+        : null}
     </>
   );
 });

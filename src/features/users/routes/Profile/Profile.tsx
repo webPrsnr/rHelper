@@ -1,3 +1,4 @@
+import { CopyClipboard } from "@/components/Elements";
 import { useUser } from "@/lib/auth";
 
 import style from "./Profile.module.css";
@@ -5,9 +6,10 @@ import style from "./Profile.module.css";
 interface UserProperty {
   label: string;
   value: string;
+  copy?: boolean;
 }
-
-const UserProperty = ({ label, value }: UserProperty) => {
+// copyToClipBoard ? copyToClipBoard : undefined
+const UserProperty = ({ label, value, copy }: UserProperty) => {
   return (
     <div className={style["user__wrapper"]}>
       <div className={style["user__elem"]}>{label}</div>
@@ -40,7 +42,9 @@ export const Profile = () => {
             <UserProperty label={"Фамилия"} value={data.lastName} />
             <UserProperty label={"Компания"} value={data.organization} />
             <UserProperty label={"Логин"} value={data.login} />
-            <UserProperty label={"API-ключ"} value={data.api} />
+            <CopyClipboard copyText={data.api}>
+              <UserProperty label={"API-ключ"} value={data.api} />
+            </CopyClipboard>
           </div>
         </div>
       </div>

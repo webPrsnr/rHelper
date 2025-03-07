@@ -31,35 +31,11 @@ export const useBlockMutation = ({
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item: DragItem, monitor) {
-      if (!blockRef.current) {
-        return;
-      }
+    drop(item) {
       const dragItem = item.hIndex;
       const dropItem = hIndex;
-
+      console.log("drgItem--", dragItem, " drpItem--", dropItem);
       if (dragItem === dropItem) {
-        return;
-      }
-
-      const hoverBoundingRect = blockRef.current?.getBoundingClientRect();
-
-      const hoverMiddleX =
-        (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
-
-      const clientOffset = monitor.getClientOffset();
-
-      if (!clientOffset) {
-        return null;
-      }
-
-      const hoverClientX = clientOffset.x - hoverBoundingRect.left;
-
-      if (dragItem < dropItem && hoverClientX < hoverMiddleX) {
-        return;
-      }
-
-      if (dragItem > dropItem && hoverClientX > hoverMiddleX) {
         return;
       }
 
@@ -69,8 +45,47 @@ export const useBlockMutation = ({
         nextBlockIndex: dropItem,
         token: userId,
       });
-      item.hIndex = dropItem;
     },
+    // hover(item: DragItem, monitor) {
+    //   if (!blockRef.current) {
+    //     return;
+    //   }
+    //   const dragItem = item.hIndex;
+    //   const dropItem = hIndex;
+
+    //   if (dragItem === dropItem) {
+    //     return;
+    //   }
+
+    //   const hoverBoundingRect = blockRef.current?.getBoundingClientRect();
+
+    //   const hoverMiddleX =
+    //     (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
+
+    //   const clientOffset = monitor.getClientOffset();
+
+    //   if (!clientOffset) {
+    //     return null;
+    //   }
+
+    //   const hoverClientX = clientOffset.x - hoverBoundingRect.left;
+
+    //   if (dragItem < dropItem && hoverClientX < hoverMiddleX) {
+    //     return;
+    //   }
+
+    //   if (dragItem > dropItem && hoverClientX > hoverMiddleX) {
+    //     return;
+    //   }
+    //   changeBlockPosition(dragItem, dropItem);
+    //   debugger;
+    //   blockMutation.mutate({
+    //     currentBlockIndex: dragItem,
+    //     nextBlockIndex: dropItem,
+    //     token: userId,
+    //   });
+    //   item.hIndex = dropItem;
+    // },
   });
 
   return { handlerId, drop };

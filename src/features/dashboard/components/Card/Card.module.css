@@ -27,6 +27,21 @@
     color: #fff
 }
 
+.grade__front {
+    background-color: rgb(0, 123, 255);
+    color: #fff
+}
+
+.grade__back {
+    background-color: rgb(204, 51, 153);
+    color: #fff
+}
+
+.grade__other {
+    background-color: rgb(255, 102, 102);
+    color: #fff
+}
+
 .card__salary {
     width: 1rem;
     height: 1rem;

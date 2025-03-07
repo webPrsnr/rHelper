@@ -4,9 +4,10 @@ import { useDeleteBlock } from "../../api/deleteBlock";
 interface BlockDelete {
   id: string;
   triggerBtn: any;
+  deleteColumn: (id: string) => void;
 }
 
-export const BlockDelete = ({ id, triggerBtn }: BlockDelete) => {
+export const BlockDelete = ({ id, triggerBtn, deleteColumn }: BlockDelete) => {
   const deleteMutation = useDeleteBlock();
   return (
     <ConfirmDialog
@@ -19,7 +20,10 @@ export const BlockDelete = ({ id, triggerBtn }: BlockDelete) => {
           type="button"
           variant="danger"
           size="sm"
-          onClick={() => deleteMutation.mutate(id)}
+          onClick={() => {
+            deleteColumn(id);
+            deleteMutation.mutate(id);
+          }}
         >
           Удалить
         </Button>

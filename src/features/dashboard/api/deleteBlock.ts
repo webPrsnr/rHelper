@@ -16,9 +16,6 @@ export const useDeleteBlock = () => {
     mutationFn: (id: string) => {
       return deleteBlock(id);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["block"] });
-    },
   });
   return mutation;
 };

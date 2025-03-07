@@ -1,0 +1,4 @@
+.area {
+    position: relative;
+    filter: blur(1px);
+}

@@ -7,6 +7,7 @@ import { SingleBlock } from "../../types";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import style from "./Panel.module.css";
+import { BlockAdd } from "../../components/BlockAdd/BlockAdd";
 
 const Board = () => {
   const { data: user } = useUser();
@@ -30,7 +31,7 @@ const Wrapper = ({ id }: { id: string }) => {
     <div className={style["panel__wrapper"]}>
       {data.status === "loading" ? (
         <Spinner size="lg" className={style["panel__spinner"]} />
-      ) : !data.data ? null : (
+      ) : data.status === "error" ? null : (
         <ColumnsWrapper columns={data.data.columns} id={id} />
       )}
     </div>
@@ -44,39 +45,35 @@ interface ColumnsWrapperProps {
 
 const ColumnsWrapper = ({ columns, id }: ColumnsWrapperProps) => {
   const [controlledColumns, setColumns] = useState(columns);
-  const changeBlockPosition = useCallback(
-    (fItem: number, sItem: number) => {
-      //TODO
-      const objArray = [];
-      const indexArray = [];
-      for (let i = 0; controlledColumns.length >= i; i++) {
-        if (controlledColumns[i].column_index === fItem) {
-          objArray.push(controlledColumns[i]);
-          indexArray.push(i);
-          break;
-        }
-      }
-      for (let i = 0; controlledColumns.length >= i; i++) {
-        if (controlledColumns[i].column_index === sItem) {
-          objArray.push(controlledColumns[i]);
-          indexArray.push(i);
-          break;
-        }
-      }
-      const firstObj = objArray[0];
-      const secondObj = objArray[1];
+  const hashArr: Record<number, number> = {};
+  controlledColumns.forEach((el, index) => (hashArr[el.column_index] = index));
+  console.log("INIT", controlledColumns);
 
-      const fIndex = indexArray[0];
-      const sIndex = indexArray[1];
+  const changeBlockPosition = (id_1: number, id_2: number) => {
+    const finalArray = [...controlledColumns]; // setState(e => [...e])
+    console.log("CHANGE", finalArray);
+    const firstEl = finalArray[hashArr[id_1]]; // index
+    firstEl.column_index = id_2;
+    const secondEl = finalArray[hashArr[id_2]]; // index
+    secondEl.column_index = id_1;
+    finalArray[hashArr[id_1]] = secondEl;
+    finalArray[hashArr[id_2]] = firstEl;
+    setColumns(finalArray);
+  };
 
-      const resArray = controlledColumns;
-      resArray[fIndex] = secondObj;
-      resArray[sIndex] = firstObj;
-      setColumns([...resArray]);
-    },
-    [id]
-  );
-  //TODO синхронизировать удаление блока react-query с controlledColumns;
+  const addColumn = (block: SingleBlock) => {
+    debugger;
+    const finalArray = [...controlledColumns, block];
+    setColumns(finalArray);
+  };
+
+  const deleteColumn = (id: string) => {
+    debugger;
+    const finalArray = controlledColumns.filter(
+      (column) => column.column_id !== id
+    );
+    setColumns(finalArray);
+  };
   return (
     <>
       {controlledColumns.map((block) => (
@@ -87,8 +84,10 @@ const ColumnsWrapper = ({ columns, id }: ColumnsWrapperProps) => {
           userId={id}
           hIndex={block.column_index}
           changeBlockPosition={changeBlockPosition}
+          deleteColumn={deleteColumn}
         />
       ))}
+      <BlockAdd id={id} addColumn={addColumn} />
     </>
   );
 };

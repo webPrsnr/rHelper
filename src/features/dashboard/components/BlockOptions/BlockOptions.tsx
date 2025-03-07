@@ -2,9 +2,11 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, ReactElement, ReactNode } from "react";
 import style from "./BlockOptions.module.css";
 import { BlockDelete } from "../BlockDelete";
+import { BlockEdit } from "../BlockEdit/BlockEdit";
 
 interface BlockOptionsProps {
   id: string;
+  deleteColumn: (id: string) => void;
 }
 
 interface BlockOptions {
@@ -12,12 +14,13 @@ interface BlockOptions {
   render?: ReactElement;
 }
 
-export const BlockOptions = ({ id }: BlockOptionsProps) => {
+export const BlockOptions = ({ id, deleteColumn }: BlockOptionsProps) => {
   const options: BlockOptions[] = [
     {
       name: "Удалить",
       render: (
         <BlockDelete
+          deleteColumn={deleteColumn}
           id={id}
           triggerBtn={<span className={style["menu__item"]}>Удалить</span>}
         />

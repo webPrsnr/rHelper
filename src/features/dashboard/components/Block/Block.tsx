@@ -1,8 +1,8 @@
-import { memo, ReactNode, useRef } from "react";
+import { ReactNode, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { CardList, DragCard } from "../Card/Card";
 import { cardType } from "../../types";
-import { useCard, useMoveCard, useTransferBlock } from "../../api";
+import { useCard, useMoveCard } from "../../api";
 import style from "./Block.module.css";
 import { Spinner } from "@/components/Elements";
 import { useBlockMutation } from "./useBlockMutation";
@@ -29,7 +29,6 @@ const BlockWrapper = ({
         return;
       }
       cardMutation.mutate({ blockId: id, cardId: item.id });
-      console.log(item, dropIndex);
     },
   });
   return <div ref={cardDrop}>{children}</div>;
@@ -41,46 +40,56 @@ interface BlockProps {
   userId: string;
   hIndex: number;
   changeBlockPosition: (fItem: number, sItem: number) => void;
+  deleteColumn: (id: string) => void;
 }
 
-export const Block = memo(
-  ({ title, id, userId, hIndex, changeBlockPosition }: BlockProps) => {
-    console.log(title);
-    const blockRef = useRef<HTMLDivElement>(null);
-    const { drop, handlerId } = useBlockMutation({
-      blockRef: blockRef,
-      changeBlockPosition: changeBlockPosition,
-      hIndex: hIndex,
-      userId: userId,
-    });
-    const cards = useCard(id);
+interface DragItem {
+  hIndex: number;
+}
 
-    const [{ isDragging }, drag] = useDrag({
-      type: "block",
-      item: () => {
-        return { hIndex };
-      },
-      collect: (monitor) => ({
-        isDragging: !!monitor.isDragging(),
-      }),
-    });
+export const Block = ({
+  title,
+  id,
+  userId,
+  hIndex,
+  changeBlockPosition,
+  deleteColumn,
+}: BlockProps) => {
+  const blockRef = useRef<HTMLDivElement>(null);
+  const { drop, handlerId } = useBlockMutation({
+    blockRef: blockRef,
+    changeBlockPosition: changeBlockPosition,
+    hIndex: hIndex,
+    userId: userId,
+  });
 
-    drag(drop(blockRef));
-    return (
-      <BlockWrapper id={id}>
-        <div
-          ref={blockRef}
-          className={style["block"]}
-          style={{ opacity: isDragging ? 0.5 : 1 }}
-          data-handler-id={handlerId}
-        >
-          {cards.status === "loading" ? (
-            <Spinner className={style["block__spinner"]} />
-          ) : (
-            <CardList id={id} title={title} />
-          )}
-        </div>
-      </BlockWrapper>
-    );
-  }
-);
+  const cards = useCard(id);
+
+  const [{ isDragging }, drag] = useDrag({
+    type: "block",
+    item: () => {
+      return { hIndex };
+    },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
+
+  drag(drop(blockRef));
+  return (
+    <BlockWrapper id={id}>
+      <div
+        ref={blockRef}
+        className={style["block"]}
+        style={{ opacity: isDragging ? 0.5 : 1 }}
+        data-handler-id={handlerId}
+      >
+        {cards.status === "loading" ? (
+          <Spinner className={style["block__spinner"]} />
+        ) : cards.status === "error" ? null : (
+          <CardList id={id} title={title} deleteColumn={deleteColumn} />
+        )}
+      </div>
+    </BlockWrapper>
+  );
+};

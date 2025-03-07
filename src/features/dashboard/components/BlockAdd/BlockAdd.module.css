@@ -1,0 +1,26 @@
+.block {
+    background-color: rgba(229, 231, 235, 1);
+    padding: 1.25rem;
+    border-radius: 0.25rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.note__block {
+    cursor: pointer;
+}
+
+.note__icon::before {
+    position: absolute;
+    background-image: url("@/assets/add.svg");
+    content: "";
+    width: 2rem;
+    height: 2rem;
+    background-size: cover;
+    left: 5px;
+    bottom: 5px;
+}
+
+.notes__form {
+    box-shadow: none;
+}
