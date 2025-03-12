@@ -70,7 +70,7 @@ export const CardEdit = ({ id, name, stack, salary }: CardOptionsProps) => {
           size="sm"
           isLoading={usePatch.isLoading}
         >
-          Submit
+          Подтвердить
         </Button>
       }
     >

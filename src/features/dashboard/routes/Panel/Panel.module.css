@@ -1,10 +1,36 @@
+.panel{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .panel__title {
     padding-top: 1.5rem;
     padding-left: 1.5rem;
 }
 
-.panel__wrapper {
+.panel__container {
+    padding-top: 24px;
+    padding-inline: 24px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.panel__link{
+    padding: 2px;
+    cursor: pointer;
+}
+
+.panel__link:hover{
+    border-radius: 4px;
+    background-color: #E8E8E8;
+}
+
+.panel__wrapper {
+    overflow: auto;
+    display: flex;
+    flex:1;
     gap: 0.5rem;
     background-color: #fff;
     margin-top: 1.5rem;

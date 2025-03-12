@@ -36,7 +36,7 @@ describe("Forms", () => {
               type="text"
             />
             <Button name={"submit"} type={"submit"}>
-              Submit
+              Подтвердить
             </Button>
           </>
         )}
@@ -63,7 +63,7 @@ describe("Forms", () => {
               type="text"
             />
             <Button name={"submit"} type={"submit"}>
-              Submit
+              Подтвердить
             </Button>
           </>
         )}

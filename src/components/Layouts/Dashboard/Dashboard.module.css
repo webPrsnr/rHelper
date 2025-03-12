@@ -12,6 +12,11 @@
     cursor: pointer;
 }
 
+.menu__button:hover {
+    background-color: #9fcdff;
+
+}
+
 .menu__icon {
     display: block;
     height: 1.5rem;
@@ -46,6 +51,11 @@
     padding-right: 1rem;
 }
 
+.header__link:hover{
+    background-color: #efeff3;
+    border-radius: 4px;
+}
+
 .dashboard__main {
     background-color: rgba(243, 244, 246);
     height: calc(100vh - 4rem);
@@ -56,12 +66,13 @@
     width: 12rem;
     right: 0;
     margin-top: 0.75rem;
-    background-color: #fff;
+    background-color: rgb(232 237 247);
     border-radius: 0.3rem;
 }
 
 .menu__item {
     display: block;
+    background-color: #fff;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 0.5rem;

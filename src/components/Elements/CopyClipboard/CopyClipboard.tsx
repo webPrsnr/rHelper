@@ -23,7 +23,7 @@ export const CopyClipboard = ({ children, copyText }: CopyClipboardProps) => {
     <Tooltip
       content={flag ? "Нажмите чтобы скопировать" : "Текст успешно скопирован"}
     >
-      <div onClick={clickHandler} className={flag ? "" : style["area"]}>
+      <div onClick={clickHandler} className={`${flag ? "" : style["area"]}, ${style["area__clipboard"]}`}>
         {children}
       </div>
     </Tooltip>

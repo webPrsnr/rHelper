@@ -6,6 +6,10 @@
     cursor: pointer;
 }
 
+.block:hover{
+    background-color: rgb(187, 185, 185);
+}
+
 .note__block {
     cursor: pointer;
 }

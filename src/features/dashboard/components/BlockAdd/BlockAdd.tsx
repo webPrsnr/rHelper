@@ -33,7 +33,7 @@ export const BlockAdd = ({ id, addColumn }: BlockAddProps) => {
               size="sm"
               isLoading={addBlock.isLoading}
             >
-              Submit
+              Подтвердить
             </Button>
           }
         >

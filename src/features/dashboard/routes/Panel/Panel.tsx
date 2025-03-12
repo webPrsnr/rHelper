@@ -8,6 +8,43 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import style from "./Panel.module.css";
 import { BlockAdd } from "../../components/BlockAdd/BlockAdd";
+import { useReportSystem } from "../../api/getReport";
+
+interface TitlePanelProps{
+  id: string
+}
+const TitlePanel = (props:TitlePanelProps) => {
+  const {id} = props
+
+
+  const downloadFile = async() => {
+    const data = await useReportSystem(id)
+    
+    const url = window.URL.createObjectURL(data);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `отчег_итог.pdf`;
+    document.body.appendChild(a);
+    
+    a.click();
+    a.remove();
+    
+    window.URL.revokeObjectURL(url);
+  }
+
+  return (
+  <div className={style['panel__container']}>
+    <h2>Мониторинг</h2>
+    <span className={style['panel__link']} onClick={() => {
+      downloadFile()
+    }}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="#71717A" d="m12 17l4-4l-1.4-1.4l-1.6 1.55V9h-2v4.15L9.4 11.6L8 13zm-6 5q-.825 0-1.412-.587T4 20V8l6-6h8q.825 0 1.413.588T20 4v16q0 .825-.587 1.413T18 22zm0-2h12V4h-7.15L6 8.85zm0 0h12z"/></svg>
+    </span>
+  </div>
+
+  )
+}
 
 const Board = () => {
   const { data: user } = useUser();
@@ -19,7 +56,7 @@ const Board = () => {
 
   return (
     <section className={style["panel"]}>
-      <h2 className={style["panel__title"]}>Мониторинг</h2>
+      <TitlePanel id={userId} />
       <Wrapper id={userId} />
     </section>
   );
@@ -47,11 +84,9 @@ const ColumnsWrapper = ({ columns, id }: ColumnsWrapperProps) => {
   const [controlledColumns, setColumns] = useState(columns);
   const hashArr: Record<number, number> = {};
   controlledColumns.forEach((el, index) => (hashArr[el.column_index] = index));
-  console.log("INIT", controlledColumns);
 
   const changeBlockPosition = (id_1: number, id_2: number) => {
     const finalArray = [...controlledColumns]; // setState(e => [...e])
-    console.log("CHANGE", finalArray);
     const firstEl = finalArray[hashArr[id_1]]; // index
     firstEl.column_index = id_2;
     const secondEl = finalArray[hashArr[id_2]]; // index

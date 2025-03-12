@@ -39,7 +39,7 @@ export const CardNotes = ({ id, fields }: CardNotesProps) => {
           size="sm"
           isLoading={usePatch.isLoading}
         >
-          Submit
+          Подтвердить
         </Button>
       }
     >

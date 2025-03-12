@@ -36,7 +36,7 @@
 }
 
 .container__body {
-    overflow-y: scroll;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     padding: 1.5rem 0;

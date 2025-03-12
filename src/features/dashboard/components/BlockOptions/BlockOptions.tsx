@@ -3,6 +3,7 @@ import { Fragment, ReactElement, ReactNode } from "react";
 import style from "./BlockOptions.module.css";
 import { BlockDelete } from "../BlockDelete";
 import { BlockEdit } from "../BlockEdit/BlockEdit";
+import { BlockReport } from "../BlockReport";
 
 interface BlockOptionsProps {
   id: string;
@@ -26,6 +27,12 @@ export const BlockOptions = ({ id, deleteColumn }: BlockOptionsProps) => {
         />
       ),
     },
+    {
+      name:"Получить отчет",
+      render:(
+        <BlockReport id={id} />
+      )
+    }
     //TODO: редактировать
   ];
   return (
